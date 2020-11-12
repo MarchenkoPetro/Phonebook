@@ -1,26 +1,7 @@
 import json
-import os
 import pickle
 
 from view import check_answer
-
-
-def read_phonebook(file_format):
-    """
-    Open phonebook and upload it into Memory
-    Returns object Phonebook = {}
-    """
-
-    pickled_data = {}
-    if file_format == 'pickle':
-        if os.path.getsize('phonebook.pickle') > 0:
-            with open(f"phonebook.pickle", "rb") as f:
-                pickled_data = pickle.load(f)
-
-    elif os.path.getsize('phonebook.json') > 0:
-        with open(f"phonebook.json", "rb") as f:
-            pickled_data = json.load(f)
-    return pickled_data
 
 
 def create_new_contact(phonebook, name):

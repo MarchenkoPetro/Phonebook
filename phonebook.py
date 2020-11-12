@@ -40,7 +40,7 @@ while True:
         delete_contact(phonebook, name)
 
     elif command == 's':
-        file_format = switch_file_format()
+        switch_file_format()
 
     elif command == 'q':
         save(phonebook)
