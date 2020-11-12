@@ -1,9 +1,8 @@
-def check_answer(chars):
-    if chars not in ('y', 'n'):
+def check_answer(answer):
+    if answer not in ('y', 'n'):
         print('You did something wrong. Bye-bye.')
         return False
-    if chars == 'n':
+    if answer == 'n':
         print('Get it! Bye!')
         return False
-    if chars == 'y':
-        return True
+    return True

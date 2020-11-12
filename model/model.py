@@ -2,8 +2,7 @@ import json
 import os
 import pickle
 
-from model import check_answer
-
+from view import check_answer
 
 
 def read_phonebook(file_format):
@@ -12,7 +11,7 @@ def read_phonebook(file_format):
     Returns object Phonebook = {}
     """
 
-    pickled_data = ''
+    pickled_data = {}
     if file_format == 'pickle':
         if os.path.getsize('phonebook.pickle') > 0:
             with open(f"phonebook.pickle", "rb") as f:
@@ -21,9 +20,6 @@ def read_phonebook(file_format):
     elif os.path.getsize('phonebook.json') > 0:
         with open(f"phonebook.json", "rb") as f:
             pickled_data = json.load(f)
-    else:
-        pickled_data = dict()
-
     return pickled_data
 
 
@@ -36,7 +32,7 @@ def create_new_contact(phonebook, name):
         print('There is already such a contact. Do you want to change its number?')
         answer = input('Enter Y or N: ').strip().lower()
         if check_answer.check_answer(answer):
-            update_contact(name)
+            update_contact(phonebook, name)
     else:
         phone_number = input('Enter a number for this contact:')
         enter_number_into_contact(phonebook, name, phone_number)

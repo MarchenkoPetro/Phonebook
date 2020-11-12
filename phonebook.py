@@ -1,11 +1,9 @@
-from phonebook_settings.phonebook_config import SETTINGS_PATH, set_config, read_config, switch_file_format
-from model.model import create_new_contact, update_contact, delete_contact, save_phonebook_and_exit, print_help_list, \
-    read_phonebook
-print('test git connection')
+from phonebook_settings.loader_init import load, save, switch_file_format
+from phonebook_settings.phonebook_config import set_config
+from model.model import create_new_contact, update_contact, delete_contact, print_help_list
+
 set_config()
-config = read_config(SETTINGS_PATH)
-file_format = config['Settings']['file_format']
-phonebook = read_phonebook(file_format)
+phonebook = load()
 
 while True:
     command = input('enter a key for operation (or enter \'help\') : ').strip().lower()
@@ -42,10 +40,10 @@ while True:
         delete_contact(phonebook, name)
 
     elif command == 's':
-        file_format = switch_file_format(SETTINGS_PATH, file_format, config)
+        file_format = switch_file_format()
 
     elif command == 'q':
-        save_phonebook_and_exit(phonebook, file_format)
+        save(phonebook)
 
     else:
         print('There is no such a command. Try again')
