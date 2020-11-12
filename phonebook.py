@@ -1,7 +1,7 @@
 from phonebook_settings.phonebook_config import SETTINGS_PATH, set_config, read_config, switch_file_format
 from model.model import create_new_contact, update_contact, delete_contact, save_phonebook_and_exit, print_help_list, \
     read_phonebook
-
+print('test git connection')
 set_config()
 config = read_config(SETTINGS_PATH)
 file_format = config['Settings']['file_format']
