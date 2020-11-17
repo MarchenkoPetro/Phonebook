@@ -1,15 +1,18 @@
-from phonebook_settings.loader_init import load, save, switch_file_format
+from model.model import Phonebook
+from phonebook_settings.loader_and_saver import Saver
+from phonebook_settings.loader_init import switch_file_format, file_format
 from phonebook_settings.phonebook_config import set_config
-from model.model import create_new_contact, update_contact, delete_contact, print_help_list
+
 
 set_config()
-phonebook = load()
+new_phonebook = Phonebook()
+phonebook = new_phonebook.phonebook
 
 while True:
     command = input('enter a key for operation (or enter \'help\') : ').strip().lower()
 
     if command == 'help':
-        print_help_list()
+        new_phonebook.print_help_list()
 
     elif command == 'a':
         if not phonebook:
@@ -28,22 +31,23 @@ while True:
 
     elif command == 'c':
         name = input('Enter name for new contact: \n').capitalize()
-        create_new_contact(phonebook, name)
+        new_phonebook.create_new_contact(phonebook, name)
 
     elif command == 'u':
         name = input('Enter a name you want to update:').capitalize()
-        update_contact(phonebook, name)
+        new_phonebook.update_contact(phonebook, name)
 
     elif command == 'd':
         name = input('Enter a name you want to delete from your phonebook:') \
             .capitalize()
-        delete_contact(phonebook, name)
+        new_phonebook.delete_contact(phonebook, name)
 
     elif command == 's':
-        switch_file_format()
+        file_format = switch_file_format()
 
     elif command == 'q':
-        save(phonebook)
+        saver = Saver(phonebook, file_format)
+        saver.save()
 
     else:
         print('There is no such a command. Try again')

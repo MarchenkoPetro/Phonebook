@@ -3,6 +3,7 @@ from phonebook_settings.phonebook_config import read_config, SETTINGS_PATH
 config = read_config(SETTINGS_PATH)
 file_format = config['Settings']['file_format']
 
+
 def switch_file_format():
     global file_format
     print(file_format)
@@ -29,32 +30,3 @@ def switch_file_format():
         config.write(config_file)
 
     return file_format
-
-
-def load():
-    print(f'current file format is => {file_format}')
-    if file_format == 'pickle':
-        from phonebook_settings.loader_and_saver import pickle_load as data_load
-    elif file_format == 'json':
-        from phonebook_settings.loader_and_saver import json_load as data_load
-    elif file_format == 'csv':
-        from phonebook_settings.loader_and_saver import scv_load as data_load
-    else:
-        from phonebook_settings.loader_and_saver import pickle_load as data_load
-
-    return data_load()
-
-
-def save(phonebook):
-    global file_format
-
-    if file_format == 'pickle':
-        from phonebook_settings.loader_and_saver import pickle_save as data_save
-    if file_format == 'json':
-        from phonebook_settings.loader_and_saver import json_save as data_save
-    if file_format == 'scv':
-        from phonebook_settings.loader_and_saver import scv_save as data_save
-
-    return data_save(phonebook)
-
-
